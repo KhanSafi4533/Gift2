@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Rubik+Distressed&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------- BASE ---------------- */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2c003e, #5d0063);
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* ---------------- HEADING ---------------- */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.2rem;
+    margin-top: 30px;
+    color: #ff9ae0;
+    text-shadow: 2px 2px 12px rgba(0,0,0,0.5);
+}
+
+.name {
+    font-family: "Rubik Distressed", system-ui;
+    font-size: 3.5rem;
+    color: #ffb6f2;
+}
+
+/* ---------------- MESSAGE ---------------- */
+#cuteMessage {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: #ffb6c1;
+    margin: 10px 20px;
+    min-height: 90px;
+}
+
+/* ---------------- CAROUSEL ---------------- */
+.carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+}
+
+.carousel-track {
+    display: flex;
+    width: max-content;
+    gap: 20px;
+    animation: scroll 25s linear infinite;
+}
+
+.carousel-track img {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.carousel-track img:hover {
+    transform: scale(1.08);
+}
+
+/* Infinite smooth animation */
+@keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Pause on hover */
+.carousel-wrapper:hover .carousel-track {
+    animation-play-state: paused;
+}
+
+/* ---------------- BUTTON ---------------- */
+#showMoreBtn {
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* ---------------- EXTRA PHOTOS ---------------- */
+#extraPhotos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+#extraPhotos img {
+    width: 180px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* ---------------- FLOATING HEARTS ---------------- */
+.floating-heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: float 8s linear infinite;
+    color: #ff9ae0;
+    opacity: 0.8;
+}
+
+@keyframes float {
+    0% { transform: translateX(0) translateY(0); }
+    100% { transform: translateX(110vw) translateY(-300px); opacity: 0; }
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+    h1 { font-size: 2.6rem; }
+    .name { font-size: 3rem; }
+    .carousel-track img {
+        width: 150px;
+        height: 230px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.3rem; }
+    .name { font-size: 2.7rem; }
+    #cuteMessage { font-size: 1rem; }
+    .carousel-track img {
+        width: 130px;
+        height: 200px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="./music/khayal.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Happy Birthday</h1>
+<div class="name">AISHU ❤️</div>
+<div id="cuteMessage"></div>
+
+<!-- CAROUSEL -->
+<div class="carousel-wrapper">
+  <div class="carousel-track">
+    <!-- ORIGINAL -->
+    <img src="./images/1.jpeg">
+    <img src="./images/2.jpeg">
+    <img src="./images/3.jpeg">
+    <img src="./images/4.jpeg">
+    <img src="./images/5.jpeg">
+    <img src="./images/6.jpeg">
+    <img src="./images/7.jpeg">
+    <img src="./images/8.jpeg">
+    <img src="./images/9.jpeg">
+    <img src="./images/10.jpeg">
+    <img src="./images/11.jpeg">
+
+    <!-- DUPLICATE FOR LOOP -->
+    <img src="./images/1.jpeg">
+    <img src="./images/2.jpeg">
+    <img src="./images/3.jpeg">
+    <img src="./images/4.jpeg">
+    <img src="./images/5.jpeg">
+    <img src="./images/6.jpeg">
+    <img src="./images/7.jpeg">
+    <img src="./images/8.jpeg">
+    <img src="./images/9.jpeg">
+    <img src="./images/10.jpeg">
+    <img src="./images/11.jpeg">
+  </div>
+</div>
+
+<button id="showMoreBtn">Show More Photos 💕</button>
+<div id="extraPhotos"></div>
+
+<script>
+/* TYPEWRITER */
+const message = `Happy Birthday Cutie 💖
+Tum meri zindagi ka brightest star ho 🌟
+Har moment tumhare saath magic lagta hai ✨
+Love you always 🥰`;
+
+let i = 0;
+const box = document.getElementById("cuteMessage");
+
+function type() {
+    if (i < message.length) {
+        box.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(type, 45);
+    }
+}
+type();
+
+/* FLOATING HEARTS */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 12 + 14 + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 9000);
+}, 400);
+
+/* SHOW MORE + MUSIC */
+document.getElementById("showMoreBtn").onclick = () => {
+    const imgs = [
+        "12","13","14","15","16","17","18","19","20","21","22","23","24"
+    ];
+    imgs.forEach(n => {
+        const img = document.createElement("img");
+        img.src = `./images/${n}.jpeg`;
+        document.getElementById("extraPhotos").appendChild(img);
+    });
+    document.getElementById("bgMusic").play();
+};
+</script>
+
+</body>
+</html>
